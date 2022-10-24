@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import Global from '../Global';
 import axios from 'axios';
-
-
 export default class DepartamentosEmpleados extends Component {
 //VARIABLE PARA HACER REFERENCIA AL <select>
 select = React.createRef();
@@ -11,7 +9,9 @@ state = {
     //Array departamentos
     departamentos: [],
     //UTILIZARLA SIEMPRE!!!!
-    status: false
+    status: false,
+    //Array empleados
+    empleados: []
 }
 
 cargarOptions = () => {
@@ -23,34 +23,29 @@ cargarOptions = () => {
             status: true
         });
     })
-        // // for (var i = 0; i <= this.state.departamentos.length; i++){
-        // //     options.push(
-        // //         <option key={i} value={i}>
-        // //             {this.state.departamentos[i]}
-        // //         </option>
-        // //     );
-        // // }
-        // for (var dept of (this.state.departamentos)){
-        //     console.log(dept.Nombre);
-        //     // options.push(
-        //     //     <option key={dept.Numero} value={dept.Numero}>
-        //     //         {dept.Nombre}
-        //     //     </option>
-        //     // );
-        // }
-        // console.log(options);
-        // // this.setState({
-        // //     departamentos: options,
-        // //     status: true
-        // // });
+        
 }
 
-
+//Al pulsar un botón, mostraremos los empleados
+//que pertenecen a dicho departamento
+//En una lista (<li>), mostrando su Apellido.
 mostrarEmpleados = (e) => {
     e.preventDefault();
-   
+
     var deptno = this.select.current.value;
-    var request="GET-api-Empleados-EmpleadosDepartamento-"+deptno;
+    console.log(deptno)
+
+    var url = Global.urlEmpleados;
+    var request = "api/Empleados/EmpleadosDepartamento/"+deptno;
+
+        axios.get(url+request).then(response => {
+            
+            console.log(response.data);
+            this.setState({
+                empleados: response.data
+            });
+        })
+        console.log("muestro empleados...");
 }
 
 //Queremos cargar los customers al iniciar la página
@@ -67,7 +62,7 @@ componentDidMount= () =>  {
                     this.state.status == true &&
                     (
                         this.state.departamentos.map((dept, index) => {
-                            return (<option key={index}>
+                            return (<option key={index} value={dept.Numero}>
                                 {dept.Nombre}
                                 </option>)
                         })
@@ -75,6 +70,19 @@ componentDidMount= () =>  {
                 }
         </select>
         <button onClick={this.mostrarEmpleados}>Mostrar empleados</button>
+        <div>
+             {/* Cargar empleados filtrados */}
+                {
+                    this.state.status == true &&
+                    (
+                        this.state.empleados.map((emp, index) => {
+                            return (
+                                <li key={index} value={emp.idEmpleado}> Departamento: {emp.departamento},
+                                 Apellido: {emp.apellido}, Oficio: {emp.oficio}, Salario: {emp.salario}€</li>)
+                        })
+                    )
+                }
+        </div>
       </div>
     )
   }

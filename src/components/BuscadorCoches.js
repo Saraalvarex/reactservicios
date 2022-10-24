@@ -29,26 +29,20 @@ export default class extends Component {
     buscarCoches = (e) => {
         e.preventDefault();
         console.log("Filtrando...")
-        var cochesAux = this.state.coches;
+        var coches = this.state.coches;
         //Recuperamos el valor de MI CAJA INPUT
         var marca = this.cajaMarcaRef.current.value.toLowerCase();
         cochesfiltrados= []
         console.log(marca)
         //Metodo filter de ARRAY
         //Array.filter(obj => obj.propiedad == valor
-        var cochesfiltrados = cochesAux.filter(car => car.marca.toLowerCase().includes(marca));
-            //Asignamos de nuevo los coches de state
+        var cochesfiltrados = coches.filter(car => car.marca.toLowerCase().includes(marca));
+
+        //Asignamos de nuevo los coches de state
             this.setState({
                 coches: cochesfiltrados
             });
-        }
-        // for (let i=0; i<=this.state.coches.length; i++){
-        //     //console.log(this.state.coches)
-        //     if (this.state.coches[i].marca == marca) {
-        //         console.log("dentro")
-        //     }
-        // }
-    
+    }
 
 //Queremos cargar los customers al iniciar la página
 componentDidMount = () =>  {
@@ -72,8 +66,10 @@ componentDidMount = () =>  {
         <table>
             <thead>
                 <tr>
-                    <td style={{color:"blue"}}>Marca</td>
-                    <td style={{color:"blue"}}>Imagen</td>
+                    <th>MARCA</th>
+                    <th>MODELO</th>
+                    <th>CONDUCTOR</th>
+                    <th>IMAGEN</th>
                 </tr>
             </thead>
             <tbody>
@@ -83,6 +79,8 @@ componentDidMount = () =>  {
                         this.state.coches.map((coche, index) => {
                             return (<tr key={index}>
                                 <td>{coche.marca}</td>
+                                <td>{coche.modelo}</td>
+                                <td>{coche.conductor}</td>
                                 <td><img style={{width: "80px"}} src={coche.imagen}/></td>
                                 </tr>)
                         })

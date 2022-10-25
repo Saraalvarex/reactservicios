@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import Home from './RutasParametros/Home';
+import MenuRutas from './RutasParametros/MenuRutas';
 import PageNotFound from './RutasParametros/PageNotFound';
 import TablaMultiplicar from './RutasParametros/TablaMultiplicar';
 
@@ -19,6 +20,7 @@ export default class Router extends Component {
 
     return (
       <BrowserRouter>
+      <MenuRutas/>
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/tabla/:minumero" element={<TablaMultiplicarElement/>}/>

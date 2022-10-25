@@ -23,21 +23,29 @@ export default class extends Component {
         })
     }
 
-    componentDidMount = () => {
-        this.generarTabla();
+    componentDidUpdate = (oldProps) => {
+        console.log("Actual Props " + this.props.numero)
+        console.log("Old Props "+ oldProps.numero)
+        //Solamente realizaremos cambios en la página
+        //cuando los props sean diferentes/han cambiado
+        if (this.props.numero!=oldProps.numero){
+            this.generarTabla();
+        }
     }
 
   render() {
     return (
       <div>
         <h1 style={{color: "blue"}}>Tabla Multiplicar {this.props.numero}</h1>
+        <table className='table table-bordered'>
         {
             this.state.tabla.map((num, index) => {
-                return (<li key={index}>
-                    {num}
-                </li>)
+                return (<tr key={index}>
+                   <td> {num} </td>
+                </tr>)
             })
         }
+        </table>
       </div>
     )
   }

@@ -6,15 +6,19 @@ import ServicioCustomers from './components/ServicioCustomers';
 import BuscadorCustomer from './components/BuscadorCustomer';
 import BuscadorCoches from './components/BuscadorCoches';
 import DepartamentosEmpleados from './components/DepartamentosEmpleados';
+import MaestroDepartamentos from './components/MaestroDetalle/MaestroDepartamentos';
+import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    {/* <ServicioCustomers/> 
-    <BuscadorCustomer/>
-    <BuscadorCoches/>*/}
-    <DepartamentosEmpleados/>
-  </React.StrictMode>
+  // <DepartamentosEmpleados/>
+  // <MaestroDepartamentos/>
+  // <React.StrictMode>
+  //   <ServicioCustomers/> 
+  //   <BuscadorCustomer/>
+  //   <BuscadorCoches/>*/}
+  // </React.StrictMode>
+  <App/>
 );
 
 // If you want to start measuring performance in your app, pass a function
